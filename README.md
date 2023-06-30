@@ -6,12 +6,12 @@
 * [Database Deployment](#database-deployment)
 * [Food Order App Deployment](#food-order-app-deployment)
 * [Food Order UI Deployment](#food-order-ui-deployment)
-* [CI & CD with GitHub Actions](#ci-&-cd-with-github-actions)
+* [CI and CD with GitHub Actions](#ci-and-cd-with-github-actions)
 * [Test the Food Order Application](#test-the-food-order-application)
-* [Food Order App Buid & Push to docker repository[Optional]](#food-order-app-buid-and-push-to-docker-repository)
-* [Food Order UI Buid & Push to docker repository[Optional]](#food-order-ui-buid-and-push-to-docker-repository) 
+* [Food Order App Buid and Push to docker repository](#food-order-app-buid-and-push-to-docker-repository)
+* [Food Order UI Buid and Push to docker repository](#food-order-ui-buid-and-push-to-docker-repository) 
 * [Uninstall](#uninstall)
-* [Verify Database & data](#verify-database-&-data)
+* [Verify Database and data](#verify-database-and-data)
 * [Improvement](#improvement)
 
 
@@ -74,7 +74,7 @@ It will show the following commands menu
   <img src="images/food-order-1.png" />
   <img src="images/food-order-2.png" />
 
-### CI & CD with GitHub Actions
+### CI and CD with GitHub Actions
   This project implements a CI/CD (Continuous Integration/Continuous Deployment) pipeline using GitHub Actions. The pipeline is responsible for building and deploying the application's Docker containers.
 
   ### Workflow: Build and Push Docker Images
@@ -93,13 +93,15 @@ It will show the following commands menu
 
   <img src="images/github-workflow.png" />
 
-### Food Order App Buid and Push to docker repository [Optional, Only required if there is a new change in the code, which we want to deploy]
+### Food Order App Buid and Push to docker repository 
+[Optional, Only required if there is a new change in the code, which we want to deploy]
 ```bash
    make build-food-order-app
    make push-food-order-app
 ```
 
-### Food Order UI Buid and Push to docker repository [Optional, Only required if there is a new change in the code, which we want to deploy]
+### Food Order UI Buid and Push to docker repository 
+[Optional, Only required if there is a new change in the code, which we want to deploy]
 ```bash
    make build-food-order-ui
    make push-food-order-ui
@@ -111,7 +113,7 @@ It will show the following commands menu
   make uninstall-mysql-db
 ```
 
-### Verify Database & data
+### Verify Database and data
  1. Get the dataabse password
  ```
  MYSQL_ROOT_PASSWORD=$(kubectl get secret --namespace mysql mysql -o jsonpath="{.data.mysql-root-password}" | base64 -d)
