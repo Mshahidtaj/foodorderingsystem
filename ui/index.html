@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Food Ordering System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 20px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Food Ordering System</h1>
+
+    <label for="date">Select Date:</label>
+    <input type="date" id="date" name="date">
+
+    <label for="menuDropdown">Select Items:</label>
+    <select id="menuDropdown"></select>
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" value="1" min="1">
+
+    <button id="submitButton">Submit Order</button>
+  </div>
+
+  <script>
+    const baseUrl = "http://localhost:8080";
+    let menuItems = [];
+
+    console.log("Fetching menu items from:", `${baseUrl}/api/menu`);
+
+    // Fetch menu items from the ${baseUrl}/api/menu endpoint
+    fetch(`${baseUrl}/api/menu`)
+      .then(response => response.json())
+      .then(items => {
+        menuItems = items;
+        console.log("Menu items:", menuItems);
+
+        const dropdown = document.getElementById('menuDropdown');
+
+        menuItems.forEach(item => {
+          const option = document.createElement('option');
+          option.value = item.name;
+          option.text = `${item.name} - $${item.price.toFixed(2)}`;
+          dropdown.appendChild(option);
+        });
+
+        console.log("Menu dropdown populated!");
+      })
+      .catch(error => console.error('Error fetching menu:', error));
+
+    document.getElementById('submitButton').addEventListener('click', () => {
+      const selectedOption = document.getElementById('menuDropdown').value;
+      const selectedItem = menuItems.find(item => item.name === selectedOption);
+
+      if (selectedItem) {
+        const order = {
+          date: document.getElementById('date').value,
+          name: selectedItem.name,
+          quantity: parseInt(document.getElementById('quantity').value)
+        };
+
+        console.log("Submitting order:", order);
+
+        fetch(`${baseUrl}/api/orders`, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(order)
+        })
+        .then(response => {
+          console.log("Order submitted. Response:", response);
+        })
+        .catch(error => console.error('Error submitting order:', error));
+      }
+    });
+  </script>
+</body>
+</html>
