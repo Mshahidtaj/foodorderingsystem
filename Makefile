@@ -37,21 +37,17 @@ start-food-order-app-ui:
 	kubectl port-forward svc/food-order-app 8080:8080 &
 	kubectl port-forward svc/food-order-ui 8081:80 &
 
-# Application container
 build-food-order-app:
-	docker buildx build --platform linux/amd64,linux/arm64 -t $(APP_CONTAINER_NAME) .
+    docker buildx build --tag $(APP_CONTAINER_NAME):$(TAG) .
 
-# UI container
-build-food-order-ui:
-	docker buildx build --platform linux/amd64,linux/arm64 -t $(UI_CONTAINER_NAME) ui/
-
-# Application container
 push-food-order-app:
-	# docker push $(APP_CONTAINER_NAME)
+    docker push $(APP_CONTAINER_NAME):$(TAG)
 
-# UI container
+build-food-order-ui:
+    docker buildx build --tag $(UI_CONTAINER_NAME):$(TAG) ui/
+
 push-food-order-ui:
-	docker push $(UI_CONTAINER_NAME)
+    docker push $(UI_CONTAINER_NAME):$(TAG)
 
 uninstall-food-system:
 	helm uninstall food-order-app --namespace food-order
