@@ -91,6 +91,8 @@ It will show the following commands menu
   6. Builds and pushes the tagged version of the app container.
   7. Builds and pushes the UI container.
 
+  <img src="images/github-workflow.png" />
+
 ### Food Order App Buid and Push to docker repository [Optional, Only required if there is a new change in the code, which we want to deploy]
 ```bash
    make build-food-order-app
