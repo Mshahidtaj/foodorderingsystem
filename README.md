@@ -1,6 +1,6 @@
 
 # Food Order System
-
+* [Overview](#overview)
 * [Prerequisites](#prerequisites)
 * [Initial Steps](#initial-steps)
 * [Database Deployment](#database-deployment)
@@ -12,19 +12,27 @@
 * [Uninstall](#uninstall)
 * [Verify Database & data](#verify-database-&-data)
 
+### Overview
+This repository contains a small test project called the 'Food Order Application,' written in GoLang, with a simple UI. It consists of the following main components:
+  1. Food App UI: This component is Dockerized and runs as a container.
+  2. Food Middleware Application: This component is Dockerized and runs as a container.
+  3. MYSQL database: The database is also running as a container and includes a persistent volume (PV).
+  4. Kubernetes Cluster: The project can be deployed on a Kubernetes cluster, such as AKS, EKS, or a test Minikube setup."
 
 ### Prerequisites
 Following tools are required to install the Food Order System.
 1. Kubectl
 2. Kubernetes cluster(e.g Kubeconfig pointing to any cloud Kubernetes e.g EKS , GKS, AKS or minimuke etc)
 3. MYSQL client [optional]
+4. Helm command line tool.
 
 ### Initial Steps
  Clone the `foodorderingsystem` repository from GitHub to your local system, as shown below
 ```bash
   git clone git@github.com:Mshahidtaj/foodorderingsystem.git
-  cd  foodorderingsystem
+  cd  foodorderingsystem  
 ```
+All building and deployment tasks are encapsulated within a Makefile to facilitate straightforward administration, `make help` command can be used show the available options, as shown below 
 ```
   make help
 ``` 
@@ -64,13 +72,13 @@ It will show the following commands menu
   <img src="images/food-order-2.png" />
 
 
-### Food Order App Buid and Push to docker repository
+### Food Order App Buid and Push to docker repository [Optional, Only required if there is a new change in the code, which we want to deploy]
 ```bash
    make build-food-order-app
    make push-food-order-app
 ```
 
-### Food Order UI Buid and Push to docker repository
+### Food Order UI Buid and Push to docker repository [Optional, Only required if there is a new change in the code, which we want to deploy]
 ```bash
    make build-food-order-ui
    make push-food-order-ui
@@ -94,14 +102,23 @@ It will show the following commands menu
 
  3. To connect to primary service (read/write):
 ```
-    mysql -h mysql.mysql.svc.cluster.local -uroot -p"$MYSQL_ROOT_PASSWORD"
+   mysql -h mysql.mysql.svc.cluster.local -uroot -p"$MYSQL_ROOT_PASSWORD"
 ```
 
 4. Misc SQL commands
-```SQL
+  ```SQL
    Show databasees;
+   ```
+
+   ```
    use food-ordering;
+   ```
+
+   ```
    show tables;
+   ```
+
+   ```
    select * from menu;
    select * from orders;
-```
+  ```
