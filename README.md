@@ -6,11 +6,14 @@
 * [Database Deployment](#database-deployment)
 * [Food Order App Deployment](#food-order-app-deployment)
 * [Food Order UI Deployment](#food-order-ui-deployment)
+* [CI & CD with GitHub Actions](#ci-&-cd-with-github-actions)
 * [Test the Food Order Application](#test-the-food-order-application)
 * [Food Order App Buid & Push to docker repository[Optional]](#food-order-app-buid-and-push-to-docker-repository)
 * [Food Order UI Buid & Push to docker repository[Optional]](#food-order-ui-buid-and-push-to-docker-repository) 
 * [Uninstall](#uninstall)
 * [Verify Database & data](#verify-database-&-data)
+* [Improvement](#improvement)
+
 
 ### Overview
 This repository contains a small test project called the 'Food Order Application,' written in GoLang, with a simple UI. It consists of the following main components:
@@ -71,6 +74,22 @@ It will show the following commands menu
   <img src="images/food-order-1.png" />
   <img src="images/food-order-2.png" />
 
+### CI & CD with GitHub Actions
+  This project implements a CI/CD (Continuous Integration/Continuous Deployment) pipeline using GitHub Actions. The pipeline is responsible for building and deploying the application's Docker containers.
+
+  ### Workflow: Build and Push Docker Images
+
+  The `build-and-push.yml` workflow file in the `.github/workflows` directory defines the CI/CD pipeline. This workflow is triggered on every push to the `main` branch.
+
+  The workflow performs the following steps:
+
+  1. Checks out the repository code.
+  2. Sets up Docker Buildx for multi-platform builds.
+  3. Logs in to the Docker registry using the provided Docker credentials.
+  4. Builds and pushes the latest version of the app container.
+  5. Generates a tag for the app container based on the branch or commit.
+  6. Builds and pushes the tagged version of the app container.
+  7. Builds and pushes the UI container.
 
 ### Food Order App Buid and Push to docker repository [Optional, Only required if there is a new change in the code, which we want to deploy]
 ```bash
@@ -122,3 +141,8 @@ It will show the following commands menu
    select * from menu;
    select * from orders;
   ```
+
+### Improvement
+  1. Add continueos deployment feature to Kubernetes e.g using GitOPS stratetgy (tools Flux / Argocd)
+  2. Add Ingress controller like `Nginx` & ingress resource for `Food Order App UI` with TLS secret to support `HTTPS`
+  3. Consider Security features for UI ingress like putting WAF e.g Cloudflare , Azure WAF or AWS Sheild etc
