@@ -150,3 +150,4 @@ It will show the following commands menu
   1. Add continueos deployment feature to Kubernetes e.g using GitOPS stratetgy (tools Flux / Argocd)
   2. Add Ingress controller like `Nginx` & ingress resource for `Food Order App UI` with TLS secret to support `HTTPS`
   3. Consider Security features for UI ingress like putting WAF e.g Cloudflare , Azure WAF or AWS Sheild etc
+  4. Add unit Test coverage
