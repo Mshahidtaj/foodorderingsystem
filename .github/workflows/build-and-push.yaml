@@ -26,20 +26,32 @@ jobs:
         id: generate_tag
         run: echo "::set-output name=tag::$(echo ${GITHUB_SHA} | cut -c1-8)"
 
-      - name: Build and push app container (latest)
+      - name: Build app container (latest)
         env:
           APP_CONTAINER_NAME: mshahidtaj/food-order-app
           TAG: latest
         run: |
           make build-food-order-app
+
+      - name: Push app container (latest)
+        env:
+          APP_CONTAINER_NAME: mshahidtaj/food-order-app
+          TAG: latest
+        run: |
           make push-food-order-app
 
-      - name: Build and push app container (tag)
+      - name: Build app container (tag)
         env:
           APP_CONTAINER_NAME: mshahidtaj/food-order-app
           TAG: ${{ steps.generate_tag.outputs.tag }}
         run: |
           make build-food-order-app
+     
+      - name: Push app container (tag)
+        env:
+          APP_CONTAINER_NAME: mshahidtaj/food-order-app
+          TAG: ${{ steps.generate_tag.outputs.tag }}
+        run: |
           make push-food-order-app
 
       - name: Build and push UI container (latest)

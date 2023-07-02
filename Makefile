@@ -2,6 +2,7 @@
 DB_CONTAINER_NAME = food-ordering-db
 APP_CONTAINER_NAME = mshahidtaj/food-order-app
 UI_CONTAINER_NAME = mshahidtaj/food-order-ui
+TAG?=latest
 
 .PHONY: parse
 
