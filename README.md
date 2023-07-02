@@ -22,6 +22,8 @@ This repository contains a small test project called the 'Food Order Application
   3. MYSQL database: The database is also running as a container and includes a persistent volume (PV).
   4. Kubernetes Cluster: The project can be deployed on a Kubernetes cluster, such as AKS, EKS, or a test Minikube setup."
 
+<img src="images/food-order-components.png" />
+
 ### Prerequisites
 Following tools are required to install the Food Order System.
 1. Kubectl
