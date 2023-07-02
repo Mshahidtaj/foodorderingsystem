@@ -17,7 +17,7 @@ help:
 	@echo "7.  Run Test                  - Testing food order app"
 	@echo "8.  build-food-order-ui       - Build food order UI"
 	@echo "8.  push-food-order-app       - build food order app"
-	@echo "10.  push-food-order-ui        - Build food order UI"
+	@echo "10. push-food-order-ui        - Build food order UI"
 	@echo "11. uninstall-food-system     - Uninstall Food System"
 	@echo "12. uninstall-mysql-db        - Uninstall MYSQL DB"
 
@@ -38,16 +38,32 @@ start-food-order-app-ui:
 	kubectl port-forward svc/food-order-ui 8081:80 &
 
 build-food-order-app:
-    docker buildx build --tag $(APP_CONTAINER_NAME):$(TAG) .
+	@if [ -z "$(TAG)" ]; then \
+		docker buildx build --tag $(APP_CONTAINER_NAME):latest . ; \
+	else \
+		docker buildx build --tag $(APP_CONTAINER_NAME):$(TAG) . ; \
+	fi
 
 push-food-order-app:
-    docker push $(APP_CONTAINER_NAME):$(TAG)
+	@if [ -z "$(TAG)" ]; then \
+		docker push $(APP_CONTAINER_NAME):latest ; \
+	else \
+		docker push $(APP_CONTAINER_NAME):$(TAG) ; \
+	fi
 
 build-food-order-ui:
-    docker buildx build --tag $(UI_CONTAINER_NAME):$(TAG) ui/
+	@if [ -z "$(TAG)" ]; then \
+		docker buildx build --tag $(UI_CONTAINER_NAME):latest ui/ ; \
+	else \
+		docker buildx build --tag $(UI_CONTAINER_NAME):$(TAG) ui/ ; \
+	fi
 
 push-food-order-ui:
-    docker push $(UI_CONTAINER_NAME):$(TAG)
+	@if [ -z "$(TAG)" ]; then \
+		docker push $(UI_CONTAINER_NAME):latest ; \
+	else \
+		docker push $(UI_CONTAINER_NAME):$(TAG) ; \
+	fi
 
 uninstall-food-system:
 	helm uninstall food-order-app --namespace food-order
