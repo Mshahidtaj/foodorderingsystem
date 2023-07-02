@@ -20,7 +20,7 @@ This repository contains a small test project called the 'Food Order Application
   1. Food App UI: This component is Dockerized and runs as a container.
   2. Food Middleware Application: This component is Dockerized and runs as a container.
   3. MYSQL database: The database is also running as a container and includes a persistent volume (PV).
-  4. Kubernetes Cluster: The project can be deployed on a Kubernetes cluster, such as AKS, EKS, or a test Minikube setup."
+  4. Kubernetes Cluster: The project can be deployed on a Kubernetes cluster, such as AKS, EKS, or a test Minikube setup.
 
 <img src="images/food-order-components.png" />
 

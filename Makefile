@@ -2,6 +2,7 @@
 DB_CONTAINER_NAME = food-ordering-db
 APP_CONTAINER_NAME = mshahidtaj/food-order-app
 UI_CONTAINER_NAME = mshahidtaj/food-order-ui
+TAG?=latest
 
 .PHONY: parse
 
@@ -38,32 +39,16 @@ start-food-order-app-ui:
 	kubectl port-forward svc/food-order-ui 8081:80 &
 
 build-food-order-app:
-	@if [ -z "$(TAG)" ]; then \
-		docker buildx build --tag $(APP_CONTAINER_NAME):latest . ; \
-	else \
-		docker buildx build --tag $(APP_CONTAINER_NAME):$(TAG) . ; \
-	fi
+		docker buildx build --tag $(APP_CONTAINER_NAME):$(TAG) .
 
 push-food-order-app:
-	@if [ -z "$(TAG)" ]; then \
-		docker push $(APP_CONTAINER_NAME):latest ; \
-	else \
-		docker push $(APP_CONTAINER_NAME):$(TAG) ; \
-	fi
+		docker push $(APP_CONTAINER_NAME):$(TAG)
 
 build-food-order-ui:
-	@if [ -z "$(TAG)" ]; then \
-		docker buildx build --tag $(UI_CONTAINER_NAME):latest ui/ ; \
-	else \
-		docker buildx build --tag $(UI_CONTAINER_NAME):$(TAG) ui/ ; \
-	fi
+		docker buildx build --tag $(UI_CONTAINER_NAME):$(TAG) ui/
 
 push-food-order-ui:
-	@if [ -z "$(TAG)" ]; then \
-		docker push $(UI_CONTAINER_NAME):latest ; \
-	else \
-		docker push $(UI_CONTAINER_NAME):$(TAG) ; \
-	fi
+		docker push $(UI_CONTAINER_NAME):$(TAG)
 
 uninstall-food-system:
 	helm uninstall food-order-app --namespace food-order
