@@ -12,7 +12,7 @@
 * [Food Order UI Buid and Push to docker repository](#food-order-ui-buid-and-push-to-docker-repository) 
 * [Uninstall](#uninstall)
 * [Verify Database and data](#verify-database-and-data)
-* [Improvement](#improvement)
+* [Improvements](#improvement)
 
 
 ### Overview

@@ -41,14 +41,8 @@ start-food-order-app-ui:
 build-food-order-app:
 		docker buildx build --tag $(APP_CONTAINER_NAME):$(TAG) . --push
 
-push-food-order-app:
-		docker push $(APP_CONTAINER_NAME):$(TAG)
-
 build-food-order-ui:
-		docker buildx build --tag $(UI_CONTAINER_NAME):$(TAG) ui/
-
-push-food-order-ui:
-		docker push $(UI_CONTAINER_NAME):$(TAG)
+		docker buildx build --tag $(UI_CONTAINER_NAME):$(TAG) ui/ --push
 
 uninstall-food-system:
 	helm uninstall food-order-app --namespace food-order
