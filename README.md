@@ -47,12 +47,19 @@ It will show the following commands menu
 
 
 ### Database Deployment
-
-1. Install MYSQL Database as Container to the Kubernets
+1. Make sure, context is correctly set to desired kubenetes cluster.e.g 
+```
+  kubectl config current-context
+```
+2. Install MYSQL Database as Container to the Kubernets
   ```bash
-     make Deploy-MySQL     
+     make deploy-mysql    
   ```
-2. Create MYSQL database Secret for Food Order Application
+Wait for the mysql pods, it should only take few seconds to get stablised. we can verify it by using the following command.
+```
+  kubectl get pods -n mysql
+```   
+3. Create MYSQL database Secret for Food Order Application
 ```bash
    make create-mysql-secret
 ```
@@ -76,6 +83,12 @@ It will show the following commands menu
   <img src="images/food-order-1.png" />
   <img src="images/food-order-2.png" />
 
+### Food Order App & UI Build and Push to docker repository [Local]
+[Optional, Only required if there is a new change in the code, which we want to deploy]
+```bash
+   make build
+```
+
 ### CI and CD with GitHub Actions
   This project implements a CI/CD (Continuous Integration/Continuous Deployment) pipeline using GitHub Actions. The pipeline is responsible for building and deploying the application's Docker containers.
 
@@ -95,7 +108,7 @@ It will show the following commands menu
 
   <img src="images/github-workflow.png" />
 
-### Food Order App Buid and Push to docker repository 
+### Food Order App Buid and Push to docker repository
 [Optional, Only required if there is a new change in the code, which we want to deploy]
 ```bash
    make build-food-order-app

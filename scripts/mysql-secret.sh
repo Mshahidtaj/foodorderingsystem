@@ -1,5 +1,4 @@
 #!/bin/bash
-set -euox
 
 NAMESPACE="food-order"
 SECRET_NAME="mysql-secret"
