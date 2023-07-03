@@ -39,7 +39,7 @@ start-food-order-app-ui:
 	kubectl port-forward svc/food-order-ui 8081:80 &
 
 build-food-order-app:
-		docker buildx build --tag $(APP_CONTAINER_NAME):$(TAG) .
+		docker buildx build --tag $(APP_CONTAINER_NAME):$(TAG) . --push
 
 push-food-order-app:
 		docker push $(APP_CONTAINER_NAME):$(TAG)
